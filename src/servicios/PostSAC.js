@@ -8,6 +8,7 @@ export default function PostData(data,tipo) {
         url = url2;
     }
     return new Promise((resolve, reject) => {
+        console.log(process.REACT_APP_API_ROOT_PYTHON);
         fetch(url, {
             method: 'POST',
             headers: {

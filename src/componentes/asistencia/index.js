@@ -22,10 +22,7 @@ class registrar extends Component {
             hora: ''
         };
     }
-    /*
-       componentWillMount() {
-           //this.datos = new Set();
-       } */
+    
     handleInputHora = (e) => {
         this.setState({
             hora: e.target.value
@@ -38,7 +35,7 @@ class registrar extends Component {
     }
 
     toggleCheckbox = label => {
-        if (this.state.datos.has(label)) {
+        if (this.state.datos && this.state.datos.has(label)) {
             this.state.datos.delete(label);
         } else {
             this.state.datos.add(label);
@@ -85,9 +82,13 @@ class registrar extends Component {
             .then(result => {
                 if(result){
                     alert('asistencia registrada');
-                    this.setState((prevState,props)=>({
-                        datos: prevState.clear,
-                        datosEnviar: prevState.clear
+                    this.state.datos.clear();
+                    this.state.datosEnviar.clear();
+                    this.setState((prevState) =>({
+                        datos:       prevState.datos,
+                        datosEnviar: prevState.datosEnviar,
+                        lugar:       "",
+                        hora:        ""
                     }));
                 }
             })
@@ -98,6 +99,7 @@ class registrar extends Component {
     }
 
     render() {
+        //console.log("actualizo componente padre");
         return (
             <Container className="mt-5">
                 <Row className="justify-content-end " style={{backgroundColor:'#ffffff'}}>
